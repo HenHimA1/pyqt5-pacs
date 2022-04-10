@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>842</width>
-    <height>544</height>
+    <width>376</width>
+    <height>449</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,6 +16,37 @@
   <layout class="QGridLayout" name="gridLayout">
    <item row="0" column="0">
     <layout class="QVBoxLayout" name="verticalLayout_11">
+     <item>
+      <layout class="QVBoxLayout" name="verticalLayout_2">
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_2">
+         <item>
+          <widget class="QLabel" name="labelPatientID">
+           <property name="text">
+            <string>Patient</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer_2">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <widget class="QComboBox" name="PatientID"/>
+       </item>
+      </layout>
+     </item>
      <item>
       <layout class="QVBoxLayout" name="verticalLayout_5">
        <item>
@@ -43,7 +74,7 @@
         </layout>
        </item>
        <item>
-        <widget class="QDateEdit" name="studyDate"/>
+        <widget class="QDateEdit" name="StudyDate"/>
        </item>
       </layout>
      </item>
@@ -79,11 +110,42 @@
       </layout>
      </item>
      <item>
+      <layout class="QVBoxLayout" name="verticalLayout_3">
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_3">
+         <item>
+          <widget class="QLabel" name="labelPatientsAg">
+           <property name="text">
+            <string>Age</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer_3">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="PatientsAg"/>
+       </item>
+      </layout>
+     </item>
+     <item>
       <layout class="QVBoxLayout" name="verticalLayout_9">
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout_9">
          <item>
-          <widget class="QLabel" name="labelStudyDescription">
+          <widget class="QLabel" name="labelStudyDescr">
            <property name="text">
             <string>Description</string>
            </property>
@@ -105,7 +167,7 @@
         </layout>
        </item>
        <item>
-        <widget class="QLineEdit" name="studyDescription"/>
+        <widget class="QLineEdit" name="StudyDescr"/>
        </item>
       </layout>
      </item>
@@ -114,7 +176,7 @@
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout_11">
          <item>
-          <widget class="QLabel" name="labelAccessionNumber">
+          <widget class="QLabel" name="labelAccessionN">
            <property name="text">
             <string>Acc. Number</string>
            </property>
@@ -136,7 +198,7 @@
         </layout>
        </item>
        <item>
-        <widget class="QLineEdit" name="accessionNumber"/>
+        <widget class="QLineEdit" name="AccessionN"/>
        </item>
       </layout>
      </item>
@@ -145,7 +207,7 @@
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout_10">
          <item>
-          <widget class="QLabel" name="labelReferPhysician">
+          <widget class="QLabel" name="labelReferPhysi">
            <property name="text">
             <string>Phy. Ref</string>
            </property>
@@ -167,7 +229,7 @@
         </layout>
        </item>
        <item>
-        <widget class="QLineEdit" name="referPhysician"/>
+        <widget class="QLineEdit" name="ReferPhysi"/>
        </item>
       </layout>
      </item>
@@ -176,7 +238,7 @@
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout_12">
          <item>
-          <widget class="QLabel" name="labelStudyModality">
+          <widget class="QLabel" name="labelStudyModal">
            <property name="text">
             <string>Modality</string>
            </property>
@@ -198,22 +260,50 @@
         </layout>
        </item>
        <item>
-        <widget class="QLineEdit" name="studyModality"/>
+        <widget class="QLineEdit" name="StudyModal"/>
        </item>
       </layout>
      </item>
      <item>
-      <spacer name="verticalSpacer_2">
-       <property name="orientation">
-        <enum>Qt::Vertical</enum>
+      <layout class="QVBoxLayout" name="verticalLayout">
+       <property name="topMargin">
+        <number>6</number>
        </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>20</width>
-         <height>40</height>
-        </size>
+       <property name="bottomMargin">
+        <number>6</number>
        </property>
-      </spacer>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout">
+         <item>
+          <widget class="QPushButton" name="createButton">
+           <property name="text">
+            <string>Create</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="cancelButton">
+           <property name="text">
+            <string>Cancel</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </item>
+      </layout>
      </item>
     </layout>
    </item>
