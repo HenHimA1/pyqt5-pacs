@@ -21,3 +21,6 @@ class Study:
                                                         "ReferPhysi": self.ReferPhysi,
                                                         "StudyModal": self.StudyModal,
                                                         "PatientID": self.PatientID})
+
+    def read(self):
+        return database.activeDatabase.read("DICOMStudies")

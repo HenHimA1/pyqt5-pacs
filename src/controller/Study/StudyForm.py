@@ -1,9 +1,7 @@
-import uuid
 from PyQt5 import QtWidgets, QtGui, QtCore
 from datetime import datetime
-from ..view.StudyForm import Ui_Form
-from ..model import Study
-from .. import database
+from ...view.StudyForm import Ui_Form
+from ...model import Study, Patient
 
 currentTime = datetime.now()
 
@@ -67,7 +65,7 @@ class ControllerStudyForm(Ui_Form, QtWidgets.QWidget):
         self.studyModel.StudyDate = self.StudyDate.date().toString()
 
     def load_patient(self):
-        self.patients = database.activeDatabase.read("DICOMPatients")
+        self.patients = Patient().read()
         self.list_patient = [patient["PatientID"] for patient in self.patients]
 
     @QtCore.pyqtSlot()

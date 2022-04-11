@@ -1,13 +1,13 @@
 from PyQt5 import QtWidgets, QtGui, QtCore
-from ..view.PatientForm import Ui_Form
-from ..model import Patient 
+from ...view.PatientForm import Ui_Form
+from ...model import Patient 
 
 
-class ControllerPatientForm(Ui_Form, QtWidgets.QWidget):
+class ControllerCreatePatientForm(Ui_Form, QtWidgets.QWidget):
     procDone = QtCore.pyqtSignal(bool)
 
     def __init__(self):
-        super(ControllerPatientForm, self).__init__()
+        super(ControllerCreatePatientForm, self).__init__()
         self.setupUi(self)
         self.patientModel = Patient()
         self.init_field()
@@ -20,12 +20,21 @@ class ControllerPatientForm(Ui_Form, QtWidgets.QWidget):
         self.PatientBir.userDateChanged.connect(self.changeBirEdit)
 
     def retranslateUi(self, Form):
-        res = super(ControllerPatientForm, self).retranslateUi(Form)
+        res = super(ControllerCreatePatientForm, self).retranslateUi(Form)
         Form.setWindowTitle("Create Patient")
         return res
 
+    def show(self):
+        self.patientModel.init_field()
+        self.init_field()
+        return super(ControllerCreatePatientForm, self).show()
+
     def init_field(self):
-        self.patientModel.PatientBir = self.PatientBir.date().toString()
+        currentDate = QtCore.QDate.currentDate()
+        self.PatientNam.setText(self.patientModel.PatientNam)
+        self.PatientSex.setText(self.patientModel.PatientSex)
+        self.PatientBir.setDate(currentDate)
+        self.patientModel.PatientBir = currentDate.toString()
 
     def changeNameEdit(self, value):
         self.patientModel.PatientNam = value
@@ -40,6 +49,8 @@ class ControllerPatientForm(Ui_Form, QtWidgets.QWidget):
     def create_button(self):
         self.patientModel.create()
         self.procDone.emit(True)
+        del self.patientModel
+        self.close()
 
     def cancel_button(self):
         self.close()

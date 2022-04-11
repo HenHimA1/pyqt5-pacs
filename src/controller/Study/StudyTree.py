@@ -1,9 +1,7 @@
 from PyQt5 import QtWidgets, QtGui, QtCore
-from ..view.StudyTree import Ui_Form
+from ...view.StudyTree import Ui_Form
 from .StudyForm import ControllerStudyForm
-from ..model import TableModel
-from .. import database
-
+from ...model import TableModel, Study
 
 class ControllerStudyTree(Ui_Form, QtWidgets.QWidget):
     def __init__(self):
@@ -26,7 +24,7 @@ class ControllerStudyTree(Ui_Form, QtWidgets.QWidget):
         self.studyForm.show()
 
     def load_study(self):
-        self.studies = database.activeDatabase.read("DICOMStudies")
+        self.studies = Study().read()
 
     def init_study_tree(self):
         self.studyTree.setModel(TableModel(self.studies))

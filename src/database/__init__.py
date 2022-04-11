@@ -18,6 +18,7 @@ class Database:
 
     def init_connection(self):
         self.connection = sqlite3.connect(self.database)
+        self.connection.row_factory = sqlite3.Row
         self.cursor = self.connection.cursor()
         self.init_schema()
 
@@ -34,9 +35,11 @@ class Database:
         return self.cursor.lastrowid
 
     def read(self, table):
-        self.connection.row_factory = sqlite3.Row
-        self.cursor = self.connection.cursor()
         query = f"SELECT * FROM {table}"
         records = self.execute(query).fetchall()
-        list_record = [{k: item[k] for k in item.keys()} for item in records]
-        return list_record
+        return [{k: item[k] for k in item.keys()} for item in records]
+
+    def browse(self, table, field, data):
+        query = f"SELECT * FROM {table} WHERE {field}='{data}'"
+        records = self.execute(query).fetchall()
+        return [{k: item[k] for k in item.keys()} for item in records]
