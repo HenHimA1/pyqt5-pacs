@@ -3,14 +3,18 @@ from .. import database
 
 
 class Study:
-    StudyInsta = ""
-    StudyDate = ""
-    StudyTime = ""
-    StudyDescr = ""
-    AccessionN = ""
-    ReferPhysi = ""
-    StudyModal = ""
-    PatientID = ""
+    def __init__(self):
+        self.init_field()
+
+    def init_field(self):
+        self.StudyInsta = ""
+        self.StudyDate = ""
+        self.StudyTime = ""
+        self.StudyDescr = ""
+        self.AccessionN = ""
+        self.ReferPhysi = ""
+        self.StudyModal = ""
+        self.PatientID = ""
 
     def create(self):
         database.activeDatabase.create("DICOMStudies", {"StudyInsta": uuid.uuid4().hex,
@@ -23,4 +27,12 @@ class Study:
                                                         "PatientID": self.PatientID})
 
     def read(self):
-        return database.activeDatabase.read("DICOMStudies")
+        records = database.activeDatabase.read("DICOMStudies")
+        items = []
+        for record in records:
+            item = {}
+            for key, value in record.items():
+                if key in self.__dict__:
+                    item[key] = value or ""
+            items.append(item)
+        return items

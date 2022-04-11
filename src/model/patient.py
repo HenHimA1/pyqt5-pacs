@@ -22,7 +22,15 @@ class Patient:
                                                          "PatientSex": self.PatientSex})
 
     def read(self):
-        return database.activeDatabase.read("DICOMPatients")
+        records = database.activeDatabase.read("DICOMPatients")
+        items = []
+        for record in records:
+            item = {}
+            for key, value in record.items():
+                if key in self.__dict__:
+                    item[key] = value or ""
+            items.append(item)
+        return items
 
     def browse(self, id):
         record = database.activeDatabase.browse(
