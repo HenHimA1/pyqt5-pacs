@@ -43,3 +43,9 @@ class Database:
         query = f"SELECT * FROM {table} WHERE {field}='{data}'"
         records = self.execute(query).fetchall()
         return [{k: item[k] for k in item.keys()} for item in records]
+
+    def delete(self, table, field, data):
+        query = f"DELETE FROM {table} WHERE {field}='{data}'"
+        self.execute(query)
+        self.connection.commit()
+        return self.cursor.rowcount

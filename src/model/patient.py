@@ -25,10 +25,16 @@ class Patient:
         return database.activeDatabase.read("DICOMPatients")
 
     def browse(self, id):
-        records = database.activeDatabase.browse(
+        record = database.activeDatabase.browse(
             "DICOMPatients", "PatientID", id)
-        if records:
-            for key, value in records[0].items():
+        if record:
+            for key, value in record[0].items():
                 if key in self.__dict__:
                     setattr(self, key, value or "")
-        return records
+        return record
+
+    def delete(self, id):
+        record = database.activeDatabase.delete("DICOMPatients", "PatientID", id)
+        if record:
+            self.init_field()
+        return record

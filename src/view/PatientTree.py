@@ -23,6 +23,9 @@ class Ui_Form(object):
         self.horizontalLayout.setObjectName("horizontalLayout")
         spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout.addItem(spacerItem)
+        self.deletePatientButton = QtWidgets.QPushButton(Form)
+        self.deletePatientButton.setObjectName("deletePatientButton")
+        self.horizontalLayout.addWidget(self.deletePatientButton)
         self.createPatientButton = QtWidgets.QPushButton(Form)
         self.createPatientButton.setObjectName("createPatientButton")
         self.horizontalLayout.addWidget(self.createPatientButton)
@@ -38,6 +41,7 @@ class Ui_Form(object):
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("Form", "Form"))
+        self.deletePatientButton.setText(_translate("Form", "Delete Patient"))
         self.createPatientButton.setText(_translate("Form", "Create Patient"))
 
 

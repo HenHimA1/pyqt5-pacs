@@ -49,7 +49,6 @@ class ControllerCreatePatientForm(Ui_Form, QtWidgets.QWidget):
     def create_button(self):
         self.patientModel.create()
         self.procDone.emit(True)
-        del self.patientModel
         self.close()
 
     def cancel_button(self):

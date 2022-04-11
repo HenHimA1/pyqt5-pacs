@@ -1,4 +1,5 @@
 from PyQt5 import QtWidgets, QtGui, QtCore
+from ...component.controller import ControllerPopupConfirm
 from ...view.PatientTree import Ui_Form
 from .CreateForm import ControllerCreatePatientForm
 from ...model import TableModel
@@ -16,7 +17,10 @@ class ControllerPatientTree(Ui_Form, QtWidgets.QWidget):
         self.patientForm = ControllerCreatePatientForm()
         self.updatePatientForm = ControllerCreatePatientForm()
         
+        self.deletePatientButton.setDisabled(True)
+
         self.createPatientButton.clicked.connect(self.create_patient_button)
+        self.deletePatientButton.clicked.connect(self.delete_patient_button)
         self.patientForm.procDone.connect(self.update_patient_tree)
         
         self.patientTree.viewport().installEventFilter(self)
@@ -39,12 +43,19 @@ class ControllerPatientTree(Ui_Form, QtWidgets.QWidget):
 
     def create_patient_button(self):
         self.patientForm.show()
+
+    def delete_patient_button(self):
+        self.deletePopup = ControllerPopupConfirm("Delete Patient", f"Are you sure want to delete {self.patientModel.PatientNam}?")
+        self.deletePopup.show()
+        if self.deletePopup.exec_() == self.deletePopup.Accepted:
+            self.patientModel.delete(self.patientModel.PatientID)
+            self.update_patient_tree()
+            self.deletePatientButton.setDisabled(True)
         
     def eventFilter(self, source, event):
         if event.type() == QtCore.QEvent.MouseButtonPress:
             if event.button() == QtCore.Qt.LeftButton:
                 index = self.patientTree.indexAt(event.pos())
                 self.patientModel.browse(self.list_patient[index.row()])
-                # if index.data():
-                #     self.clipboardLabel.setText(index.data())
+                self.deletePatientButton.setDisabled(False)
         return super(ControllerPatientTree, self).eventFilter(source, event)
