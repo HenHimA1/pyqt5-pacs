@@ -26,6 +26,9 @@ class Ui_Form(object):
         self.deletePatientButton = QtWidgets.QPushButton(Form)
         self.deletePatientButton.setObjectName("deletePatientButton")
         self.horizontalLayout.addWidget(self.deletePatientButton)
+        self.updatePatientButton = QtWidgets.QPushButton(Form)
+        self.updatePatientButton.setObjectName("updatePatientButton")
+        self.horizontalLayout.addWidget(self.updatePatientButton)
         self.createPatientButton = QtWidgets.QPushButton(Form)
         self.createPatientButton.setObjectName("createPatientButton")
         self.horizontalLayout.addWidget(self.createPatientButton)
@@ -42,6 +45,7 @@ class Ui_Form(object):
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("Form", "Form"))
         self.deletePatientButton.setText(_translate("Form", "Delete Patient"))
+        self.updatePatientButton.setText(_translate("Form", "Update Patient"))
         self.createPatientButton.setText(_translate("Form", "Create Patient"))
 
 

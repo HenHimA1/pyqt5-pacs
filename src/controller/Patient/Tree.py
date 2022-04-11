@@ -2,6 +2,7 @@ from PyQt5 import QtWidgets, QtGui, QtCore
 from ...component.controller import ControllerPopupConfirm
 from ...view.PatientTree import Ui_Form
 from .CreateForm import ControllerCreatePatientForm
+from .UpdateForm import ControllerUpdatePatientForm
 from ...model import TableModel
 from ...model import Patient
 
@@ -14,14 +15,17 @@ class ControllerPatientTree(Ui_Form, QtWidgets.QWidget):
         self.load_patient()
         self.init_patient_tree()
 
-        self.patientForm = ControllerCreatePatientForm()
-        self.updatePatientForm = ControllerCreatePatientForm()
+        self.createPatientForm = ControllerCreatePatientForm()
+        self.updatePatientForm = ControllerUpdatePatientForm()
         
         self.deletePatientButton.setDisabled(True)
+        self.updatePatientButton.setDisabled(True)
 
         self.createPatientButton.clicked.connect(self.create_patient_button)
+        self.updatePatientButton.clicked.connect(self.update_patient_button)
         self.deletePatientButton.clicked.connect(self.delete_patient_button)
-        self.patientForm.procDone.connect(self.update_patient_tree)
+        self.createPatientForm.procDone.connect(self.update_patient_tree)
+        self.updatePatientForm.procDone.connect(self.update_patient_tree)
         
         self.patientTree.viewport().installEventFilter(self)
 
@@ -42,7 +46,11 @@ class ControllerPatientTree(Ui_Form, QtWidgets.QWidget):
         self.init_patient_tree()
 
     def create_patient_button(self):
-        self.patientForm.show()
+        self.createPatientForm.show()
+
+    def update_patient_button(self):
+        self.updatePatientForm.patientModel = self.patientModel
+        self.updatePatientForm.show()
 
     def delete_patient_button(self):
         self.deletePopup = ControllerPopupConfirm("Delete Patient", f"Are you sure want to delete {self.patientModel.PatientNam}?")
@@ -51,6 +59,7 @@ class ControllerPatientTree(Ui_Form, QtWidgets.QWidget):
             self.patientModel.delete(self.patientModel.PatientID)
             self.update_patient_tree()
             self.deletePatientButton.setDisabled(True)
+            self.updatePatientButton.setDisabled(True)
         
     def eventFilter(self, source, event):
         if event.type() == QtCore.QEvent.MouseButtonPress:
@@ -58,4 +67,5 @@ class ControllerPatientTree(Ui_Form, QtWidgets.QWidget):
                 index = self.patientTree.indexAt(event.pos())
                 self.patientModel.browse(self.list_patient[index.row()])
                 self.deletePatientButton.setDisabled(False)
+                self.updatePatientButton.setDisabled(False)
         return super(ControllerPatientTree, self).eventFilter(source, event)

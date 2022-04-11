@@ -42,7 +42,16 @@ class Patient:
         return record
 
     def delete(self, id):
-        record = database.activeDatabase.delete("DICOMPatients", "PatientID", id)
+        record = database.activeDatabase.delete(
+            "DICOMPatients", "PatientID", id)
         if record:
             self.init_field()
+        return record
+
+    def update(self):
+        record = database.activeDatabase.update("DICOMPatients", "PatientID", self.PatientID, {"PatientNam": self.PatientNam,
+                                                                                               "PatientBir": self.PatientBir,
+                                                                                               "PatientSex": self.PatientSex})
+        # if record:
+        #     self.init_field()
         return record

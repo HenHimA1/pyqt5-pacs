@@ -39,6 +39,13 @@
         </widget>
        </item>
        <item>
+        <widget class="QPushButton" name="updatePatientButton">
+         <property name="text">
+          <string>Update Patient</string>
+         </property>
+        </widget>
+       </item>
+       <item>
         <widget class="QPushButton" name="createPatientButton">
          <property name="text">
           <string>Create Patient</string>
